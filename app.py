@@ -94,7 +94,7 @@ if value > 0:
         st.info("Light as a feather 🪶")
     else:
         st.success("✅ Conversion successful!")
-    st.balloons()
+
 
     # Copy button
     st.markdown(f"""

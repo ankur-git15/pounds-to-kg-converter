@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_extras.let_it_rain import rain
-from streamlit_extras.emoji_explainer import emoji_explainer
+from streamlit_extras.emoji_explainer 
 
 # Page setup
 st.set_page_config(page_title="Pounds ↔ Kilograms Converter", page_icon="⚖️", layout="centered")

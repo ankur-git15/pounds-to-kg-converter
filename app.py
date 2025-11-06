@@ -11,28 +11,42 @@ st.set_page_config(
 st.markdown("""
     <style>
         body {
-            background-color: #f7f9fc;
+            background: linear-gradient(160deg, #e8f0fe, #f7f9fc);
             font-family: 'Segoe UI', sans-serif;
         }
         .main {
-            background: white;
-            padding: 2rem 3rem;
+            background: #ffffff;
+            padding: 2.5rem 3rem;
             border-radius: 1.5rem;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
-            max-width: 650px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            max-width: 700px;
             margin: auto;
         }
         h1 {
             text-align: center;
-            color: #004C97;
+            color: #003366; /* Deep blue */
             font-weight: 800;
             margin-bottom: 0.3rem;
         }
         .subtitle {
             text-align: center;
             font-size: 1rem;
-            color: #555;
+            color: #444;
+            margin-bottom: 1.8rem;
+        }
+        .converter-section {
+            background-color: #f2f6ff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-left: 6px solid #004C97;
             margin-bottom: 1.5rem;
+        }
+        .reference-section {
+            background-color: #f9fdf5;
+            padding: 1.8rem;
+            border-radius: 1rem;
+            border-left: 6px solid #6BA368;
+            margin-top: 1rem;
         }
         .stButton>button {
             background-color: #004C97;
@@ -44,7 +58,7 @@ st.markdown("""
             font-weight: 600;
         }
         .stButton>button:hover {
-            background-color: #0072CE;
+            background-color: #0065d1;
         }
         .footer {
             text-align: center;
@@ -57,26 +71,24 @@ st.markdown("""
 
 # ------------------ PAGE HEADER ------------------
 st.markdown("<h1>⚖️ Handgrip Strength Reference Tool</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>Developed under the CSIR Phenome India Cohort Initiative | Reliable • Fast • Accurate</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>A simplified reference interface for field and research use</p>", unsafe_allow_html=True)
 
-# ------------------ UNIT CONVERTER ------------------
-st.subheader("1️⃣ Pounds ↔ Kilograms Converter")
+# ------------------ SECTION 1: POUNDS ➜ KILOGRAMS CONVERTER ------------------
+st.markdown("<div class='converter-section'>", unsafe_allow_html=True)
+st.subheader("1️⃣ Pounds ➜ Kilograms Converter")
 
-option = st.radio("Select conversion type:", ("Pounds ➜ Kilograms", "Kilograms ➜ Pounds"))
-value = st.number_input("Enter value:", min_value=0.0, step=0.1, format="%.2f")
+value = st.number_input("Enter handgrip strength (in pounds):", min_value=0.0, step=0.1, format="%.2f")
 
 converted_value = None
-if st.button("Convert"):
-    if option == "Pounds ➜ Kilograms":
-        converted_value = value * 0.45359237
-        st.success(f"{value:.2f} lb = {converted_value:.2f} kg")
-    else:
-        converted_value = value / 0.45359237
-        st.success(f"{value:.2f} kg = {converted_value:.2f} lb")
+if st.button("Convert to Kilograms"):
+    converted_value = value * 0.45359237
+    st.success(f"{value:.2f} lb = {converted_value:.2f} kg")
 
 # Store converted value for reuse
 if converted_value:
     st.session_state["converted_value"] = round(converted_value, 2)
+
+st.markdown("</div>", unsafe_allow_html=True)
 
 # ------------------ NORMATIVE DATA ------------------
 normative_data = {
@@ -96,37 +108,35 @@ normative_data = {
     }
 }
 
-# ------------------ NORMATIVE COMPARISON TOOL ------------------
+# ------------------ SECTION 2: HANDGRIP STRENGTH REFERENCE ------------------
+st.markdown("<div class='reference-section'>", unsafe_allow_html=True)
 st.subheader("2️⃣ Handgrip Strength Normative Comparison")
 
-# Input form
 col1, col2 = st.columns(2)
 with col1:
     sex = st.radio("Select Sex:", ["Male", "Female"])
 with col2:
     age_group = st.selectbox("Select Age Group:", ["18–29", "30–39", "40–49", "50–59", "≥60"])
 
-# Prefill HGS value with converted result if available
 default_val = st.session_state.get("converted_value", 0.0)
 grip_strength = st.number_input("Enter Handgrip Strength (kg):", min_value=0.0, step=0.1, value=default_val, format="%.2f")
 
-# Comparison logic
-if st.button("Classify Grip Strength"):
+if st.button("Compare with Normative Data"):
     ref = normative_data[sex][age_group]
     p5, p25, p50, p75, p95 = ref["p5"], ref["p25"], ref["p50"], ref["p75"], ref["p95"]
 
     if grip_strength < p5:
-        band, category, color = "<5th percentile", "Very Low Strength", "red"
+        band, category, color = "<5th percentile", "Very Low Strength", "#D9534F"
     elif grip_strength < p25:
-        band, category, color = "5th–25th percentile", "Low Strength", "orange"
+        band, category, color = "5th–25th percentile", "Low Strength", "#F0AD4E"
     elif grip_strength < p50:
-        band, category, color = "25th–50th percentile", "Below Median", "gold"
+        band, category, color = "25th–50th percentile", "Below Median", "#FFD700"
     elif grip_strength < p75:
-        band, category, color = "50th–75th percentile", "Normal Range", "green"
+        band, category, color = "50th–75th percentile", "Normal Range", "#5CB85C"
     elif grip_strength < p95:
-        band, category, color = "75th–95th percentile", "Above Average", "blue"
+        band, category, color = "75th–95th percentile", "Above Average", "#0275D8"
     else:
-        band, category, color = "≥95th percentile", "Exceptional Strength", "purple"
+        band, category, color = "≥95th percentile", "Exceptional Strength", "#613DC1"
 
     st.markdown(f"""
         <div style='background-color:{color}; color:white; padding:1rem; border-radius:10px; text-align:center;'>
@@ -136,11 +146,12 @@ if st.button("Classify Grip Strength"):
         </div>
     """, unsafe_allow_html=True)
 
+st.markdown("</div>", unsafe_allow_html=True)
+
 # ------------------ FOOTER ------------------
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("""
 <div class='footer'>
-    © 2025 CSIR Phenome India Initiative | Handgrip Strength & Anthropometric Reference Tool<br>
-    Built with ❤️ using Streamlit
+    © 2025 CSIR Phenome India Initiative | Handgrip Strength & Anthropometric Reference Tool
 </div>
 """, unsafe_allow_html=True)

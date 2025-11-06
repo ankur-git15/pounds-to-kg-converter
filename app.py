@@ -75,8 +75,7 @@ if st.button("Convert"):
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("""
 <div class='footer'>
-    © 2025 Phenome India Initiative<br>
-    <i>Handgrip Strength & Anthropometric Reference Tool</i><br>
-    Built with ❤️ using Streamlit
+    <br>
+    <i></i><br>
 </div>
 """, unsafe_allow_html=True)

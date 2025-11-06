@@ -2,7 +2,7 @@ import streamlit as st
 
 # ------------------ PAGE SETUP ------------------
 st.set_page_config(
-    page_title="Pounds ↔ Kilograms Converter | CSIR-IGIB Phenome India",
+    page_title="Pounds ↔ Kilograms Converter | CSIR Phenome India",
     page_icon="⚖️",
     layout="centered"
 )
@@ -52,29 +52,12 @@ st.markdown("""
             font-size: 0.85rem;
             margin-top: 2rem;
         }
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.2rem;
-            margin-bottom: 1.2rem;
-        }
-        .logo-container img {
-            height: 70px;
-        }
     </style>
 """, unsafe_allow_html=True)
 
 # ------------------ HEADER ------------------
-st.markdown("""
-<div class='logo-container'>
-    <img src='https://upload.wikimedia.org/wikipedia/en/9/93/CSIR_INDIA_Logo.png' alt='CSIR logo'>
-    <img src='https://eminddev.tech/frontend/images/igib.png' alt='IGIB logo'>
-</div>
-""", unsafe_allow_html=True)
-
 st.markdown("<h1>⚖️ Pounds ↔ Kilograms Converter</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>Developed under the CSIR Phenome India Cohort Initiative | Reliable • Fast • Accurate</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>Conversion made Easy", unsafe_allow_html=True)
 
 # ------------------ CONVERSION LOGIC ------------------
 option = st.radio("Select conversion type:", ("Pounds ➜ Kilograms", "Kilograms ➜ Pounds"))
@@ -92,7 +75,7 @@ if st.button("Convert"):
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("""
 <div class='footer'>
-    © 2025 CSIR-IGIB • Phenome India Initiative<br>
+    © 2025 Phenome India Initiative<br>
     <i>Handgrip Strength & Anthropometric Reference Tool</i><br>
     Built with ❤️ using Streamlit
 </div>

@@ -59,7 +59,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ------------------ HEADER ------------------
-st.image("https://www.csir.res.in/sites/default/files/csirlogo.jpg", width=100)
+st.image("https://eminddev.tech/frontend/images/igib.png", width=100)
 st.markdown("<h1>⚖️ Pounds ↔ Kilograms Converter</h1>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>Accurate. Instant. Mobile-ready.</div>", unsafe_allow_html=True)
 

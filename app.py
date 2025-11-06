@@ -7,24 +7,24 @@ st.set_page_config(
     layout="centered"
 )
 
-# ------------------ CUSTOM STYLING ------------------
+# ------------------ CLEAN STYLING ------------------
 st.markdown("""
     <style>
         body {
-            background: linear-gradient(160deg, #f5f8fc, #eef3f8);
+            background-color: #ffffff;
             font-family: 'Segoe UI', sans-serif;
         }
         .main {
-            background: #ffffff;
+            background-color: #ffffff;
             padding: 2.5rem 3rem;
             border-radius: 1.5rem;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            box-shadow: none;
             max-width: 700px;
             margin: auto;
         }
         h1 {
             text-align: center;
-            color: #003366;
+            color: #002855;
             font-weight: 800;
             margin-bottom: 0.1rem;
         }
@@ -34,22 +34,8 @@ st.markdown("""
             color: #444;
             margin-bottom: 2rem;
         }
-        .converter-section {
-            background-color: #f2f6ff;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            border-left: 5px solid #004C97;
-            margin-bottom: 1.5rem;
-        }
-        .reference-section {
-            background-color: #f9fdf5;
-            padding: 1.8rem;
-            border-radius: 1rem;
-            border-left: 5px solid #6BA368;
-            margin-top: 1rem;
-        }
         .stButton>button {
-            background-color: #004C97;
+            background-color: #002855;
             color: white;
             border-radius: 8px;
             padding: 0.5rem 1.2rem;
@@ -58,7 +44,7 @@ st.markdown("""
             font-weight: 600;
         }
         .stButton>button:hover {
-            background-color: #0065d1;
+            background-color: #004C97;
         }
         .footer {
             text-align: center;
@@ -69,12 +55,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ------------------ PAGE HEADER ------------------
+# ------------------ HEADER ------------------
 st.markdown("<h1>Handgrip Strength Reference Tool</h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>A data-driven reference for quick handgrip strength assessment</p>", unsafe_allow_html=True)
 
-# ------------------ CONVERTER SECTION ------------------
-st.markdown("<div class='converter-section'>", unsafe_allow_html=True)
+# ------------------ CONVERTER ------------------
 st.subheader("Pounds to Kilograms Converter")
 
 value = st.number_input("Enter handgrip strength (in pounds):", min_value=0.0, step=0.1, format="%.2f")
@@ -86,8 +71,6 @@ if st.button("Convert to Kilograms"):
 
 if converted_value:
     st.session_state["converted_value"] = round(converted_value, 2)
-
-st.markdown("</div>", unsafe_allow_html=True)
 
 # ------------------ NORMATIVE DATA ------------------
 normative_data = {
@@ -107,8 +90,7 @@ normative_data = {
     }
 }
 
-# ------------------ REFERENCE SECTION ------------------
-st.markdown("<div class='reference-section'>", unsafe_allow_html=True)
+# ------------------ NORMATIVE COMPARISON ------------------
 st.subheader("Handgrip Strength Normative Comparison")
 
 col1, col2 = st.columns(2)
@@ -144,8 +126,6 @@ if st.button("Compare with Normative Data"):
             lies within the <b>{band}</b>.</p>
         </div>
     """, unsafe_allow_html=True)
-
-st.markdown("</div>", unsafe_allow_html=True)
 
 # ------------------ FOOTER ------------------
 st.markdown("<hr>", unsafe_allow_html=True)

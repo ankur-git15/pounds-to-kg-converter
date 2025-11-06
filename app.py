@@ -7,11 +7,11 @@ st.set_page_config(
     layout="centered"
 )
 
-# ------------------ CLEAN STYLING ------------------
+# ------------------ CUSTOM STYLING ------------------
 st.markdown("""
     <style>
         body {
-            background-color: #ffffff;
+            background-color: #f2f3f4; /* Matte neutral background */
             font-family: 'Segoe UI', sans-serif;
         }
         .main {
@@ -22,20 +22,29 @@ st.markdown("""
             max-width: 700px;
             margin: auto;
         }
-        h1 {
+        .title-box {
+            background-color: #e8eef5; /* Soft bluish-grey matte box */
+            border-left: 6px solid #004C97;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
             text-align: center;
+        }
+        .title-box h1 {
             color: #002855;
             font-weight: 800;
-            margin-bottom: 0.1rem;
+            margin: 0;
+            font-size: 1.8rem;
         }
         .subtitle {
             text-align: center;
             font-size: 1rem;
-            color: #444;
-            margin-bottom: 2rem;
+            color: #555;
+            margin-top: 0.4rem;
+            margin-bottom: 1.5rem;
         }
         .stButton>button {
-            background-color: #002855;
+            background-color: #004C97;
             color: white;
             border-radius: 8px;
             padding: 0.5rem 1.2rem;
@@ -44,19 +53,22 @@ st.markdown("""
             font-weight: 600;
         }
         .stButton>button:hover {
-            background-color: #004C97;
+            background-color: #0065d1;
         }
-        .footer {
-            text-align: center;
-            color: #6c757d;
-            font-size: 0.85rem;
-            margin-top: 2rem;
+        h2, h3 {
+            color: #004C97;
+            font-weight: 700;
         }
     </style>
 """, unsafe_allow_html=True)
 
 # ------------------ HEADER ------------------
-st.markdown("<h1>Handgrip Strength Reference Tool</h1>", unsafe_allow_html=True)
+st.markdown("""
+<div class='title-box'>
+    <h1>Handgrip Strength Reference Tool</h1>
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown("<p class='subtitle'>A data-driven reference for quick handgrip strength assessment</p>", unsafe_allow_html=True)
 
 # ------------------ CONVERTER ------------------
@@ -126,11 +138,3 @@ if st.button("Compare with Normative Data"):
             lies within the <b>{band}</b>.</p>
         </div>
     """, unsafe_allow_html=True)
-
-# ------------------ FOOTER ------------------
-st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("""
-<div class='footer'>
-    © 2025 CSIR Phenome India Initiative | Handgrip Strength Reference Tool
-</div>
-""", unsafe_allow_html=True)

@@ -7,7 +7,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# ------------------ STYLING ------------------
+# ------------------ CUSTOM STYLING ------------------
 st.markdown("""
     <style>
         body {
@@ -24,35 +24,40 @@ st.markdown("""
         }
         h1 {
             text-align: center;
-            color: #003366; /* Deep blue */
+            color: #003366;
             font-weight: 800;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
+        }
+        h2 {
+            color: #004C97;
+            font-weight: 700;
+            margin-top: 0.5rem;
         }
         .subtitle {
             text-align: center;
             font-size: 1rem;
             color: #444;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
         }
         .converter-section {
             background-color: #f2f6ff;
             padding: 1.5rem;
             border-radius: 1rem;
-            border-left: 6px solid #004C97;
+            border-left: 5px solid #004C97;
             margin-bottom: 1.5rem;
         }
         .reference-section {
             background-color: #f9fdf5;
             padding: 1.8rem;
             border-radius: 1rem;
-            border-left: 6px solid #6BA368;
+            border-left: 5px solid #6BA368;
             margin-top: 1rem;
         }
         .stButton>button {
             background-color: #004C97;
             color: white;
-            border-radius: 10px;
-            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
             border: none;
             font-size: 1rem;
             font-weight: 600;
@@ -70,12 +75,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ------------------ PAGE HEADER ------------------
-st.markdown("<h1>⚖️ Handgrip Strength Reference Tool</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>A simplified reference interface for field and research use</p>", unsafe_allow_html=True)
+st.markdown("<h1>Handgrip Strength Reference Tool</h1>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>A data-driven reference for quick handgrip strength assessment</p>", unsafe_allow_html=True)
 
-# ------------------ SECTION 1: POUNDS ➜ KILOGRAMS CONVERTER ------------------
+# ------------------ CONVERTER SECTION ------------------
 st.markdown("<div class='converter-section'>", unsafe_allow_html=True)
-st.subheader("1️⃣ Pounds ➜ Kilograms Converter")
+st.subheader("Pounds to Kilograms Converter")
 
 value = st.number_input("Enter handgrip strength (in pounds):", min_value=0.0, step=0.1, format="%.2f")
 
@@ -84,7 +89,6 @@ if st.button("Convert to Kilograms"):
     converted_value = value * 0.45359237
     st.success(f"{value:.2f} lb = {converted_value:.2f} kg")
 
-# Store converted value for reuse
 if converted_value:
     st.session_state["converted_value"] = round(converted_value, 2)
 
@@ -108,9 +112,9 @@ normative_data = {
     }
 }
 
-# ------------------ SECTION 2: HANDGRIP STRENGTH REFERENCE ------------------
+# ------------------ NORMATIVE COMPARISON SECTION ------------------
 st.markdown("<div class='reference-section'>", unsafe_allow_html=True)
-st.subheader("2️⃣ Handgrip Strength Normative Comparison")
+st.subheader("Handgrip Strength Normative Comparison")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -126,17 +130,17 @@ if st.button("Compare with Normative Data"):
     p5, p25, p50, p75, p95 = ref["p5"], ref["p25"], ref["p50"], ref["p75"], ref["p95"]
 
     if grip_strength < p5:
-        band, category, color = "<5th percentile", "Very Low Strength", "#D9534F"
+        band, category, color = "<5th percentile", "Very Low Strength", "#C0392B"
     elif grip_strength < p25:
-        band, category, color = "5th–25th percentile", "Low Strength", "#F0AD4E"
+        band, category, color = "5th–25th percentile", "Low Strength", "#E67E22"
     elif grip_strength < p50:
-        band, category, color = "25th–50th percentile", "Below Median", "#FFD700"
+        band, category, color = "25th–50th percentile", "Below Median", "#F1C40F"
     elif grip_strength < p75:
-        band, category, color = "50th–75th percentile", "Normal Range", "#5CB85C"
+        band, category, color = "50th–75th percentile", "Normal Range", "#27AE60"
     elif grip_strength < p95:
-        band, category, color = "75th–95th percentile", "Above Average", "#0275D8"
+        band, category, color = "75th–95th percentile", "Above Average", "#2980B9"
     else:
-        band, category, color = "≥95th percentile", "Exceptional Strength", "#613DC1"
+        band, category, color = "≥95th percentile", "Exceptional Strength", "#6C3483"
 
     st.markdown(f"""
         <div style='background-color:{color}; color:white; padding:1rem; border-radius:10px; text-align:center;'>
@@ -152,6 +156,6 @@ st.markdown("</div>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("""
 <div class='footer'>
-    © 2025 CSIR Phenome India Initiative | Handgrip Strength & Anthropometric Reference Tool
+    © 2025 CSIR Phenome India Initiative | Handgrip Strength Reference Tool
 </div>
 """, unsafe_allow_html=True)

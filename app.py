@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_extras.let_it_rain import rain
 
 # Page setup
 st.set_page_config(page_title="Pounds ↔ Kilograms Converter", page_icon="⚖️", layout="centered")
@@ -15,6 +14,8 @@ st.markdown("""
             padding: 2rem;
             border-radius: 1.5rem;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
         }
         h1 {
             text-align: center;
@@ -45,9 +46,6 @@ st.markdown("""
 # Title and subtitle
 st.markdown("<h1>⚖️ Pounds ↔ Kilograms Converter</h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>Quick, simple, and accurate — convert instantly!</p>", unsafe_allow_html=True)
-
-# Subtle animated background
-rain(emoji="💫", font_size=20, falling_speed=5, animation_length="infinite")
 
 # Conversion logic
 option = st.radio("Select conversion type:", ("Pounds ➜ Kilograms", "Kilograms ➜ Pounds"))

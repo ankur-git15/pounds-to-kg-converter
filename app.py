@@ -1,6 +1,5 @@
 import streamlit as st
 from streamlit_extras.let_it_rain import rain
-from streamlit_extras.emoji_explainer 
 
 # Page setup
 st.set_page_config(page_title="Pounds ↔ Kilograms Converter", page_icon="⚖️", layout="centered")
@@ -43,11 +42,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Title
+# Title and subtitle
 st.markdown("<h1>⚖️ Pounds ↔ Kilograms Converter</h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>Quick, simple, and accurate — convert instantly!</p>", unsafe_allow_html=True)
 
-# Rain animation (subtle confetti effect)
+# Subtle animated background
 rain(emoji="💫", font_size=20, falling_speed=5, animation_length="infinite")
 
 # Conversion logic

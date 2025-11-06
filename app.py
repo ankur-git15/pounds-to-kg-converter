@@ -11,7 +11,7 @@ st.set_page_config(
 st.markdown("""
     <style>
         body {
-            background: linear-gradient(160deg, #e8f0fe, #f7f9fc);
+            background: linear-gradient(160deg, #f5f8fc, #eef3f8);
             font-family: 'Segoe UI', sans-serif;
         }
         .main {
@@ -26,18 +26,13 @@ st.markdown("""
             text-align: center;
             color: #003366;
             font-weight: 800;
-            margin-bottom: 0.2rem;
-        }
-        h2 {
-            color: #004C97;
-            font-weight: 700;
-            margin-top: 0.5rem;
+            margin-bottom: 0.1rem;
         }
         .subtitle {
             text-align: center;
             font-size: 1rem;
             color: #444;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
         .converter-section {
             background-color: #f2f6ff;
@@ -112,7 +107,7 @@ normative_data = {
     }
 }
 
-# ------------------ NORMATIVE COMPARISON SECTION ------------------
+# ------------------ REFERENCE SECTION ------------------
 st.markdown("<div class='reference-section'>", unsafe_allow_html=True)
 st.subheader("Handgrip Strength Normative Comparison")
 
